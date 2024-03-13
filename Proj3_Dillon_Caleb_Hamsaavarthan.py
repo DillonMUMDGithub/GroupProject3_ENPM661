@@ -116,9 +116,15 @@ VisitedQ = []
 ClosedParent = []
 Parent = []
 C2C = []
+C2G = []
 OpenQ.append(startNode)
 C2C.append(0)
+C2G.append(ObstMatC2G[startNode[1]][startNode[0]])
+TotalC2 = 0 + ObstMatC2G[startNode[1]][startNode[0]]
 TotalQ = PriorityQueue()
+
+
+
 TotalQ.put((0, [startNode,'N/A']))
 ClosedQPrio = PriorityQueue()
 
@@ -139,6 +145,7 @@ while(Stop==0):
         
         QPop = TotalQ.get()
         WorkingC2C = QPop[0]
+        
         WorkingNode = QPop[1][0]
         WorkingParent = QPop[1][1]
         Stop = CheckifGoal(WorkingNode,endNode)
@@ -158,6 +165,8 @@ while(Stop==0):
         if A ==0:
             B = CheckClosed(Up,ClosedQ)
             if B ==0:
+                UpC2G = ObstMatC2G[Up[1],Up[0]]
+                Uptotal = UpC2C+UpC2G
                 if UpC2C<ObstMatC2C[Up[1]][Up[0]]:
                     ObstMatC2C[Up[1]][Up[0]] = UpC2C
                     # ObstMatG[Up[1]][Up[0]] = 255
@@ -172,6 +181,8 @@ while(Stop==0):
         if A ==0:
             B = CheckClosed(Down,ClosedQ)
             if B ==0:
+                DownC2G = ObstMatC2G[Down[1],Down[0]]
+                Downtotal = DownC2C+DownC2G
                 if DownC2C<ObstMatC2C[Down[1]][Down[0]]:
                     ObstMatC2C[Down[1]][Down[0]] = DownC2C
                     # ObstMatG[Down[1]][Down[0]] = 255
@@ -185,6 +196,8 @@ while(Stop==0):
         if A ==0:
             B = CheckClosed(Left,ClosedQ)
             if B ==0:
+                LeftC2G = ObstMatC2G[Left[1],Left[0]]
+                Lefttotal = LeftC2C+LeftC2G
                 if LeftC2C<ObstMatC2C[Left[1]][Left[0]]:
                     ObstMatC2C[Left[1]][Left[0]] = LeftC2C
                     # ObstMatG[Left[1]][Left[0]] = 255
@@ -198,6 +211,9 @@ while(Stop==0):
         if A ==0:
             B = CheckClosed(Right,ClosedQ)
             if B ==0:
+                
+                RightC2G = ObstMatC2G[Right[1],Right[0]]
+                Righttotal = RightC2C+RightC2G
                 if RightC2C<ObstMatC2C[Right[1]][Right[0]]:
                     ObstMatC2C[Right[1]][Right[0]] = RightC2C
                     # ObstMatG[Right[1]][Right[0]] = 255
@@ -211,6 +227,8 @@ while(Stop==0):
         if A ==0:
             B = CheckClosed(UL,ClosedQ)
             if B ==0:
+                ULC2G = ObstMatC2G[UL[1],UL[0]]
+                ULtotal = ULC2C+ULC2G
                 if ULC2C<ObstMatC2C[UL[1]][UL[0]]:
                     ObstMatC2C[UL[1]][UL[0]] = ULC2C
                     # ObstMatG[UL[1]][UL[0]] = 255
@@ -224,6 +242,8 @@ while(Stop==0):
         if A ==0:
             B = CheckClosed(UR,ClosedQ)
             if B ==0:
+                URC2G = ObstMatC2G[UR[1],UR[0]]
+                URtotal = URC2C+URC2G
                 if URC2C<ObstMatC2C[UR[1]][UR[0]]:
                     ObstMatC2C[UR[1]][UR[0]] = URC2C
                     # ObstMatG[UR[1]][UR[0]] = 255
@@ -237,6 +257,8 @@ while(Stop==0):
         if A ==0:
             B = CheckClosed(DL,ClosedQ)
             if B ==0:
+                DLC2G = ObstMatC2G[DL[1],DL[0]]
+                DLtotal = DLC2C+DLC2G
                 if DLC2C<ObstMatC2C[DL[1]][DL[0]]:
                     ObstMatC2C[DL[1]][DL[0]] = DLC2C
                     # ObstMatG[DL[1]][DL[0]] = 255
@@ -250,6 +272,8 @@ while(Stop==0):
         if A ==0:
             B = CheckClosed(DR,ClosedQ)
             if B ==0:
+                DRC2G = ObstMatC2G[DR[1],DR[0]]
+                DRtotal = DRC2C+DRC2G
                 if DRC2C<ObstMatC2C[DR[1]][DR[0]]:
                     ObstMatC2C[DR[1]][DR[0]] = DRC2C
                     # ObstMatG[DR[1]][DR[0]] = 255
