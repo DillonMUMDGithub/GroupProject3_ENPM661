@@ -206,10 +206,11 @@ for i in range(519,649):
 #Using Euclidean distance for C2G
 # print(len(ObstMatC2C[1]))
 GoalPoint = [1150,300]
+
 for i in range(0,1200):
     
     for k in range(0,500):
-        print(i,k)
+        # print(i,k)
         if ObstMatC2C[k][i] == np.inf:
             x1 = i
             y1 = k
