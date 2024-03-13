@@ -124,8 +124,8 @@ TotalC2 = 0 + ObstMatC2G[startNode[1]][startNode[0]]
 TotalQ = PriorityQueue()
 
 
-
-TotalQ.put((0, [startNode,'N/A']))
+# TotalQ.put((0, [startNode,'N/A']))
+TotalQ.put((TotalC2, [startNode,'N/A']))
 ClosedQPrio = PriorityQueue()
 
 imgmat = []
@@ -144,10 +144,12 @@ while(Stop==0):
     
         
         QPop = TotalQ.get()
-        WorkingC2C = QPop[0]
+        WorkingC2 = QPop[0]
         
+        # WorkingC2C = WorkingC2C-
         WorkingNode = QPop[1][0]
         WorkingParent = QPop[1][1]
+        WorkingC2C = WorkingC2-ObstMatC2G[WorkingNode[1]][WorkingNode[0]]
         Stop = CheckifGoal(WorkingNode,endNode)
         if Stop ==1:
             FinalNode = WorkingNode
@@ -173,7 +175,7 @@ while(Stop==0):
                     OpenQ.append(Up)
                     Parent.append(WorkingNode)
                     C2C.append(UpC2C)
-                    TotalQ.put((UpC2C,[Up,WorkingNode]))   
+                    TotalQ.put((Uptotal,[Up,WorkingNode]))   
 
             
         Down,DownC2C =MoveDown(WorkingNode,WorkingC2C)
@@ -189,7 +191,7 @@ while(Stop==0):
                     OpenQ.append(Down)
                     Parent.append(WorkingNode)
                     C2C.append(DownC2C)
-                    TotalQ.put((DownC2C,[Down,WorkingNode])) 
+                    TotalQ.put((Downtotal,[Down,WorkingNode])) 
                     
         Left,LeftC2C =MoveLeft(WorkingNode,WorkingC2C)
         A = CheckIfObstacle(Left,ObstMatC2C)
@@ -204,7 +206,7 @@ while(Stop==0):
                     OpenQ.append(Left)
                     Parent.append(WorkingNode)
                     C2C.append(LeftC2C)
-                    TotalQ.put((LeftC2C,[Left,WorkingNode])) 
+                    TotalQ.put((Lefttotal,[Left,WorkingNode])) 
                     
         Right,RightC2C =MoveRight(WorkingNode,WorkingC2C)
         A = CheckIfObstacle(Right,ObstMatC2C)
@@ -220,7 +222,7 @@ while(Stop==0):
                     OpenQ.append(Right)
                     Parent.append(WorkingNode)
                     C2C.append(RightC2C)
-                    TotalQ.put((RightC2C,[Right,WorkingNode])) 
+                    TotalQ.put((Righttotal,[Right,WorkingNode])) 
                     
         UL,ULC2C =MoveUL(WorkingNode,WorkingC2C)
         A = CheckIfObstacle(UL,ObstMatC2C)
@@ -235,7 +237,7 @@ while(Stop==0):
                     OpenQ.append(UL)
                     Parent.append(WorkingNode)
                     C2C.append(ULC2C)
-                    TotalQ.put((ULC2C,[UL,WorkingNode])) 
+                    TotalQ.put((ULtotal,[UL,WorkingNode])) 
                     
         UR,URC2C =MoveUR(WorkingNode,WorkingC2C)
         A = CheckIfObstacle(UR,ObstMatC2C)
@@ -250,7 +252,7 @@ while(Stop==0):
                     OpenQ.append(UR)
                     Parent.append(WorkingNode)
                     C2C.append(URC2C)
-                    TotalQ.put((URC2C,[UR,WorkingNode])) 
+                    TotalQ.put((URtotal,[UR,WorkingNode])) 
                     
         DL,DLC2C =MoveDL(WorkingNode,WorkingC2C)
         A = CheckIfObstacle(DL,ObstMatC2C)
@@ -265,7 +267,7 @@ while(Stop==0):
                     OpenQ.append(DL)
                     Parent.append(WorkingNode)
                     C2C.append(DLC2C)
-                    TotalQ.put((DLC2C,[DL,WorkingNode])) 
+                    TotalQ.put((DLtotal,[DL,WorkingNode])) 
                     
         DR,DRC2C =MoveDR(WorkingNode,WorkingC2C)
         A = CheckIfObstacle(DR,ObstMatC2C)
@@ -280,7 +282,7 @@ while(Stop==0):
                     OpenQ.append(DR)
                     Parent.append(WorkingNode)
                     C2C.append(DRC2C)
-                    TotalQ.put((DRC2C,[DR,WorkingNode])) 
+                    TotalQ.put((DRtotal,[DR,WorkingNode])) 
         if Go%1500 ==0:
             print(Go)
             # ObstMat3d = np.dstack((ObstMatR,ObstMatG,ObstMatB))
