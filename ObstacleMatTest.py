@@ -7,6 +7,7 @@ from PIL import Image
 ObstMatC2C = np.full((500,1200),np.inf)
 #Create a C2G representation of the map
 ObstMatC2G = np.full((500,1200),-1)
+VisitedMat = np.full((500,1200),0)
 
 ObstMatR = np.full((500,1200),0)
 ObstMatG = np.full((500,1200),0)
