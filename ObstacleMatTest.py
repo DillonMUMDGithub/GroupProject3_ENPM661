@@ -7,6 +7,7 @@ from PIL import Image
 ObstMatC2C = np.full((500,1200),np.inf)
 #Create a C2G representation of the map
 ObstMatC2G = np.full((500,1200),-1)
+ClosedMat = np.full((500,1200),0)
 VisitedMat = np.full((500,1200),0)
 
 ObstMatR = np.full((500,1200),0)
@@ -206,7 +207,7 @@ for i in range(519,649):
 # print(ObstMatC2C[375][564])
 #Using Euclidean distance for C2G
 # print(len(ObstMatC2C[1]))
-GoalPoint = [1150,300]
+GoalPoint = [800,350]
 
 for i in range(0,1200):
     
