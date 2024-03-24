@@ -11,7 +11,14 @@ import os
 import cv2 as cv
 import math
 
+#####Accept Inputs from User#####
 stepsize = 50
+Radius = 5
+Clearance=5
+
+
+
+
 #Create Action Set
 def Actions(state):
     ActionSet = []
@@ -90,7 +97,8 @@ start = time.time()
 count=0
 # While (OpenList not EMPTY) and (Not reached the goal) do
 # while not OpenQ.empty():
-while count<1500000:
+plt.matshow(ObstMatC2C)
+while count<30000:
     count=count+1
     # x OpenList.get()
     # WorkingNode = OpenList.get()
@@ -102,10 +110,13 @@ while count<1500000:
     TotalCost = QPop[0]
     
     # ClosedMat[WorkingRounded[1]][WorkingRounded[0]] = TotalCost
-    ClosedList.append(WorkingNode)
-    ParentList.append(WorkingRounded = QPop[1][2])
+    # ClosedList.append(WorkingNode)
+    # ParentList.append(WorkingRounded)
     IsGoal = CheckIfGoal(WorkingNode,endNode)
     # if x = Xg
+    
+    
+    
     if IsGoal == 1:
         print("AtGoal)")
         # Run backtrack function
@@ -133,10 +144,11 @@ while count<1500000:
                     OpenQ.put(NewPut)
                     VisitedMat[ActionRound[i][1]][ActionRound[i][0]] = 1
                     ##
-                    IsGoal = CheckIfGoal([ActionSet[i][0],ActionSet[i][1],ActionSet[i][2]],endNode)
-    # if x = Xg
-                    if IsGoal == 1:
-                        print("AtGoal)")
+                    plt.plot([ActionRound[i][0],WorkingNode[0]],[ActionRound[i][1],WorkingNode[1]])
+                    # IsGoal = CheckIfGoal([ActionSet[i][0],ActionSet[i][1],ActionSet[i][2]],endNode)
+    # if x = Xg     
+                    # if IsGoal == 1:
+                        # print("AtGoal)")
                 elif Visited ==1:
                     NewC2C = WorkingC2C+stepsize
                     NewC2G = ObstMatC2G[ActionRound[i][1]][ActionRound[i][0]]
@@ -151,6 +163,7 @@ while count<1500000:
                     # CostToCome(x’) CostToCome(x) + L(x,u) # L(x,u) is the cost of the action
                     # Cost(x’) CostToCome(x’) + CostToGo(x’)
                     # OpenList.put(x’)
+                        plt.plot([ActionRound[i][0],WorkingNode[0]],[ActionRound[i][1],WorkingNode[1]])
             # else
                 
                 # If Cost(x’) > CostToCome(x) + L(x,u)
