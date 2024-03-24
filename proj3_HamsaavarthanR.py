@@ -23,37 +23,175 @@ border = round//2
 map = np.ones((500, 1200, 3), dtype='uint8')*255
 
 # Rectangle Obstacles (Blue) with 5mm Borders (Black)
-rect1 = np.array([[100,0],[175,0],[175,400],[100,400]], np.int32)
-cv.fillPoly(map, [rect1], (255,0,0))
-drect1 = np.array([[100-border,0-border],[175+border,0-border],[175+border,400+border],[100-border,400+border]], np.int32)
-cv.polylines(map, [drect1.reshape((-1,1,2))],True,(0,0,0),thickness=round)
-rect2 = np.array([[275,100],[350,100],[350,500],[275,500]], np.int32)
-cv.fillPoly(map, [rect2], (255,0,0))
-drect2 = np.array([[275-border,100-border],[350+border,100-border],[350+border,500+border],[275-border,500+border]], np.int32)
-cv.polylines(map, [drect2.reshape((-1,1,2))],True,(0,0,0),thickness=round)
-rect3 = np.array([[1020,125],[1100,125],[1100,375],[1020,375]], np.int32)
-cv.fillPoly(map, [rect3], (255,0,0))
-drect3 = np.array([[1020-border,125-border],[1100+border,125-border],[1100+border,375+border],[1020-border,375+border]], np.int32)
-cv.polylines(map, [drect3.reshape((-1,1,2))],True,(0,0,0),thickness=round)
-rect4 = np.array([[900,50],[1100,50],[1100,125],[900,125]], np.int32)
-cv.fillPoly(map, [rect4], (255,0,0))
-drect4 = np.array([[900-border,50-border],[1100+border,50-border],[1100+border,125+border],[900-border,125+border]], np.int32)
-cv.polylines(map, [drect4.reshape((-1,1,2))],True,(0,0,0),thickness=round)
+# rect1 = np.array([[100,0],[175,0],[175,400],[100,400]], np.int32)
+# cv.fillPoly(map, [rect1], (255,0,0))
+# drect1 = np.array([[100-border,0-border],[175+border,0-border],[175+border,400+border],[100-border,400+border]], np.int32)
+# cv.polylines(map, [drect1.reshape((-1,1,2))],True,(0,0,0),thickness=round)
+# rect2 = np.array([[275,100],[350,100],[350,500],[275,500]], np.int32)
+# cv.fillPoly(map, [rect2], (255,0,0))
+# drect2 = np.array([[275-border,100-border],[350+border,100-border],[350+border,500+border],[275-border,500+border]], np.int32)
+# cv.polylines(map, [drect2.reshape((-1,1,2))],True,(0,0,0),thickness=round)
+# rect3 = np.array([[1020,125],[1100,125],[1100,375],[1020,375]], np.int32)
+# cv.fillPoly(map, [rect3], (255,0,0))
+# drect3 = np.array([[1020-border,125-border],[1100+border,125-border],[1100+border,375+border],[1020-border,375+border]], np.int32)
+# cv.polylines(map, [drect3.reshape((-1,1,2))],True,(0,0,0),thickness=round)
+# rect4 = np.array([[900,50],[1100,50],[1100,125],[900,125]], np.int32)
+# cv.fillPoly(map, [rect4], (255,0,0))
+# drect4 = np.array([[900-border,50-border],[1100+border,50-border],[1100+border,125+border],[900-border,125+border]], np.int32)
+# cv.polylines(map, [drect4.reshape((-1,1,2))],True,(0,0,0),thickness=round)
 
-rect5 = np.array([[900,375],[1100,375],[1100,450],[900,450]], np.int32)
-cv.fillPoly(map, [rect5], (255,0,0))
-drect5 = np.array([[900-border,375-border],[1100+border,375-border],[1100+border,450+border],[900-border,450+border]], np.int32)
-cv.polylines(map, [drect5.reshape((-1,1,2))],True,(0,0,0),thickness=round)
+# rect5 = np.array([[900,375],[1100,375],[1100,450],[900,450]], np.int32)
+# cv.fillPoly(map, [rect5], (255,0,0))
+# drect5 = np.array([[900-border,375-border],[1100+border,375-border],[1100+border,450+border],[900-border,450+border]], np.int32)
+# cv.polylines(map, [drect5.reshape((-1,1,2))],True,(0,0,0),thickness=round)
 
-# Boundary walls 5mm (Black)
-drect6 = np.array([[0+border,0+border],[1200-border,0+border],[1200-border,500-border],[0+border,500-border]], np.int32)
-cv.polylines(map, [drect6.reshape((-1,1,2))],True,(0,0,0),thickness=round)
+# # Boundary walls 5mm (Black)
+# drect6 = np.array([[0+border,0+border],[1200-border,0+border],[1200-border,500-border],[0+border,500-border]], np.int32)
+# cv.polylines(map, [drect6.reshape((-1,1,2))],True,(0,0,0),thickness=round)
+
+# # Hexagonal Polygon (Blue) with 5mm Border (Black)
+# pts = np.array([[650,100],[780,175],[780,325],[650,400],[520,325],[520,175]], np.int32)
+# cv.fillPoly(map,[pts],(255,0,0))
+# pts = pts.reshape((-1,1,2))
+# cv.polylines(map,[pts],True,(0,0,0),thickness=round)
+
+for i in range(99-round,175+round):
+    for k in range(0,399+round):
+        map[k][i] = (0,0,0)
+#Inner Red Triangle
+for i in range(99,175):
+    for k in range(0,399):
+        map[k][i] = (255,0,0)
+
+#Rectangel2:
+#Outer Black Rectangle
+for i in range(274-round,350+round):
+    for k in range(99-round,500):
+        map[k][i] = (0,0,0)
+# Inner Red Dectangle
+for i in range(274,350):
+    for k in range(99,500):
+        map[k][i] = (255,0,0)
+ 
+#Right Obstacle (HorseShoe)
+
+for i in range(1019-round,1099+round):
+    for k in range(49-round,449+round):
+        map[k][i] = (0,0,0)
+        #Red
+for i in range(1019,1099):
+    for k in range(49,449):
+        map[k][i] = (255,0,0)
+        #blue
+for i in range(899-round,1019):
+    for k in range(374-round,449+round):
+        map[k][i] = (0,0,0)
+        #Red
+for i in range(899,1019):
+    for k in range(374,449):
+        map[k][i] = (255,0,0)
+        #Blue
+        
+for i in range(899-round,1019):
+    for k in range(49-round,119+round):
+        map[k][i] = (0,0,0)
+        #Red
+for i in range(899,1019):
+    for k in range(49,119):
+        map[k][i] = (255,0,0)
+        #Blue       
+
 
 # Hexagonal Polygon (Blue) with 5mm Border (Black)
-pts = np.array([[650,100],[780,175],[780,325],[650,400],[520,325],[520,175]], np.int32)
-cv.fillPoly(map,[pts],(255,0,0))
-pts = pts.reshape((-1,1,2))
-cv.polylines(map,[pts],True,(0,0,0),thickness=round)
+
+for i in range(519-round,779+round):
+    for k in range(174,324):
+        map[k][i] = (0,0,0)
+        #red
+        #Red Barrier Middle Rectangle
+for i in range(519,779):
+    for k in range(174,324):
+        map[k][i] = (255,0,0)
+        #blue      
+        
+#TopLeftTriangle
+# GRat = (75+round)/(130+round)
+GRat = 75/130
+for i in range(519-round,649):
+    for k in range(324,399+round):
+        XTemp = i-(519-round)
+        YTemp = k-324
+        if ((XTemp+round)*GRat)>YTemp:
+            map[k][i] = (0,0,0)
+            #red
+#Top Left No Barrier
+GRat = 75/130
+for i in range(519,649):
+    for k in range(324,399):
+        XTemp = i-519
+        YTemp = k-324
+        if (XTemp*GRat)>YTemp:
+            map[k][i] = (255,0,0)
+            #blue           
+            
+            
+#TopRight Triangle
+# GRat = -(75+round)/(130+round)  
+GRat = -75/130        
+for i in range(649,779+round):
+    for k in range(324,399+round):
+        XTemp = i-649
+        YTemp = k-324
+        if (XTemp*GRat)+(75+round)>YTemp:
+            map[k][i] = (0,0,0)
+            #red
+            #TopRight No barrier
+GRat = -75/130        
+for i in range(649,779):
+    for k in range(324,399):
+        # ObstMatC2C[k][i] = -1
+        XTemp = i-649
+        YTemp = k-324
+        if (XTemp*GRat)+75>YTemp:
+            map[k][i] = (255,0,0)
+            #blue       #Need to fix  
+#BotRightTriangle (Technically Top Right)
+
+GRat = 75/130
+for i in range(649,779+round):
+    for k in range(99-round,174):
+        XTemp = i-649
+        YTemp = k-(99-round)
+        if (XTemp*GRat)<YTemp:
+            map[k][i] = (0,0,0)
+            #red
+GRat = 75/130
+for i in range(649,779):
+    for k in range(99,174):
+        XTemp = i-649
+        YTemp = k-99
+        if (XTemp*GRat)<YTemp:
+            map[k][i] = (255,0,0)
+            #blue
+#BotLeft Triangle
+# GRat = -(75+round)/(130+round)    
+GRat = -75/130
+for i in range(519-round,649):
+    for k in range(99-round,174):
+        XTemp = i-(519-round)
+        YTemp = k-(99-round)
+        if ((XTemp+round)*GRat)+(75+round)<YTemp:
+            map[k][i] = (0,0,0)
+            #red   
+GRat = -75/130        
+for i in range(519,649):
+    for k in range(99,174):
+        XTemp = i-519
+        YTemp = k-99
+        if (XTemp*GRat)+75<YTemp:
+            map[k][i] = (255,0,0)
+            #blue
+
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
 
