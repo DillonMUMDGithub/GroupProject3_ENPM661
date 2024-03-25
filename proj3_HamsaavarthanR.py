@@ -244,7 +244,7 @@ xg, yg = x2, y2
 cv.circle(img,(xs,ys),radius,(0,255,255),-1) # Source --> 'Yellow'
 cv.circle(img,(xg,yg),radius,(255,0,255),-1) # Goal --> 'Purple'
 # Write out to 'dijkstra_output.avi' video file
-out = cv.VideoWriter('A*_output.avi', cv.VideoWriter_fourcc(*'XVID'), 60, (1200,500))
+out = cv.VideoWriter('A*_output.mp4', cv.VideoWriter_fourcc(*'mp4v'), 60, (1200,500))
 out.write(img)
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
@@ -383,7 +383,8 @@ for i in range(0,len(path)-1):
        out.write(img)
 
 # Last frame in path travelling
-out.write(img)
+for i in range(120):
+    out.write(img)
 
 # Display 'Optimal Path' for 5 seconds
 cv.imshow("Optimal Path", img)
