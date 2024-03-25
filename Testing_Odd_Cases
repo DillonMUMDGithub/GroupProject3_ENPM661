@@ -3,11 +3,23 @@
 
 #TESTING STRANGE CASE... WHEN TESTED IT WAS GIVING ODD OUTPUTS
 
+
 #Clearance from obstacles and walls: 5
 #Radius of mobile robot: 5
-#Step size of the mobile robot in range [1,10]: 1
+#Step size of the mobile robot in range [1,10]: 2
 #Heuristic weightage (Enter 1 for default A* execution): 1
+#Building Workspace for Mobile Robot........!
+#Node is a point (X,Y) in cartesian plane for X∈[0,1200] and Y∈[0,500]
+#X - Coordinate of Source Node: 10
+#Y - Coordinate of Source Node: 10
+#X - Coordinate of Goal Node: 1150
+#Y - Coordinate of Goal Node: 450
+#Orientation of nodes (in degrees) is the direction of mobile robot from [180, 150, 120, .., 30, 0, -30, -60, .., -150]
+#Orientation of Source Node (in degrees): 0
+#Orientation of Goal Node (in degrees): 180
 
+
+#PROBLEM FOUND, THE STEP SIZE WAS DEGSINED FOR 500*1200 AND NOT 250*600
 
 #=========================================================================================================================================#
 
