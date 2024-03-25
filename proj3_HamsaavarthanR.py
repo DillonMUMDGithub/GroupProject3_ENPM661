@@ -47,7 +47,6 @@ for i in range(274,350):
 for i in range(1019-round,1099+round):
     for k in range(49-round,449+round):
         map[k][i] = (0,0,0)
-        #Red
 #Inner Red Rectangle
 for i in range(1019,1099):
     for k in range(49,449):
@@ -80,15 +79,14 @@ for i in range(899,1019):
 for i in range(519-round,779+round):
     for k in range(174,324):
         map[k][i] = (0,0,0)
-        #red
-        #Red Barrier Middle Rectangle
+#Red Interior Middle Rectangle
 for i in range(519,779):
     for k in range(174,324):
         map[k][i] = (255,0,0)
         #blue      
         
 #TopLeftTriangle
-# GRat = (75+round)/(130+round)
+
 GRat = 75/130
 for i in range(519-round,649):
     for k in range(324,399+round):
@@ -97,19 +95,16 @@ for i in range(519-round,649):
         if ((XTemp+round)*GRat)>YTemp:
             map[k][i] = (0,0,0)
             #red
-#Top Left No Barrier
+#Top Left Red Inner
 GRat = 75/130
 for i in range(519,649):
     for k in range(324,399):
         XTemp = i-519
         YTemp = k-324
         if (XTemp*GRat)>YTemp:
-            map[k][i] = (255,0,0)
-            #blue           
-            
-            
-#TopRight Triangle
-# GRat = -(75+round)/(130+round)  
+            map[k][i] = (255,0,0)       
+#Top Right Triangle
+#Outer Boundary
 GRat = -75/130        
 for i in range(649,779+round):
     for k in range(324,399+round):
@@ -117,19 +112,17 @@ for i in range(649,779+round):
         YTemp = k-324
         if (XTemp*GRat)+(75+round)>YTemp:
             map[k][i] = (0,0,0)
-            #red
-            #TopRight No barrier
+            
+#TopRight No barrier
 GRat = -75/130        
 for i in range(649,779):
     for k in range(324,399):
-        # ObstMatC2C[k][i] = -1
         XTemp = i-649
         YTemp = k-324
         if (XTemp*GRat)+75>YTemp:
             map[k][i] = (255,0,0)
-            #blue       #Need to fix  
-#BotRightTriangle (Technically Top Right)
 
+#BotRightTriangle 
 GRat = 75/130
 for i in range(649,779+round):
     for k in range(99-round,174):
@@ -137,7 +130,6 @@ for i in range(649,779+round):
         YTemp = k-(99-round)
         if (XTemp*GRat)<YTemp:
             map[k][i] = (0,0,0)
-            #red
 GRat = 75/130
 for i in range(649,779):
     for k in range(99,174):
@@ -145,17 +137,14 @@ for i in range(649,779):
         YTemp = k-99
         if (XTemp*GRat)<YTemp:
             map[k][i] = (255,0,0)
-            #blue
-#BotLeft Triangle
-# GRat = -(75+round)/(130+round)    
+#BotLeft Triangle   
 GRat = -75/130
 for i in range(519-round,649):
     for k in range(99-round,174):
         XTemp = i-(519-round)
         YTemp = k-(99-round)
         if ((XTemp+round)*GRat)+(75+round)<YTemp:
-            map[k][i] = (0,0,0)
-            #red   
+            map[k][i] = (0,0,0)  
 GRat = -75/130        
 for i in range(519,649):
     for k in range(99,174):
@@ -163,7 +152,7 @@ for i in range(519,649):
         YTemp = k-99
         if (XTemp*GRat)+75<YTemp:
             map[k][i] = (255,0,0)
-            #blue
+
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
