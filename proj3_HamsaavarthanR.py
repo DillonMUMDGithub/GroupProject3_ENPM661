@@ -11,10 +11,12 @@ import time
 #----------------------------------------------------------------------------------------------------------------------------------------#
 
 # ## Get input for clearance (units) from the obstacle and Step Size of the mobile robot ##
-clear = int(input("Clearance from obstacles and walls: "))
-radius = int(input("Radius of mobile robot: "))
-s = int(input("Step size of the mobile robot in range [1,10]: "))
-w = int(input("Heuristic weightage (Enter 1 for default A* execution): "))
+clear = int(float(input("Clearance from obstacles and walls: ")))
+radius = int(float(input("Radius of mobile robot: ")))
+s = int(float(input("Step size of the mobile robot in range [1,10]: ")))
+if s<2:
+    s=2
+w = int(float(input("Heuristic weightage (Enter 1 for default A* execution): ")))
 clearance = clear + radius
 round = round(clearance/2) + clearance%2
 border = round//2
@@ -205,13 +207,13 @@ def backTrack(x,y,l):
 ## Get 'Source' and 'Goal' node and check if it's reachable ##
 while True:
     print("Node is a point (X,Y) in cartesian plane for X∈[0,1200] and Y∈[0,500]")
-    x1 = int(input("X - Coordinate of Source Node: "))
-    y1 = int(input("Y - Coordinate of Source Node: "))
-    x2 = int(input("X - Coordinate of Goal Node: "))
-    y2 = int(input("Y - Coordinate of Goal Node: "))
+    x1 = int(float(input("X - Coordinate of Source Node: ")))
+    y1 = int(float(input("Y - Coordinate of Source Node: ")))
+    x2 = int(float(input("X - Coordinate of Goal Node: ")))
+    y2 = int(float(input("Y - Coordinate of Goal Node: ")))
     print("Orientation of nodes (in degrees) is the direction of mobile robot from [180, 150, 120, .., 30, 0, -30, -60, .., -150]")
-    a1 = int(input("Orientation of Source Node (in degrees): "))
-    a2 = int(input("Orientation of Goal Node (in degrees): "))
+    a1 = int(float(input("Orientation of Source Node (in degrees): ")))
+    a2 = int(float(input("Orientation of Goal Node (in degrees): ")))
     # Convert a1, a2 to the corresponding layer number in the 3D array of 'nodes'
     l = []
     for a in [a1,a2]:
