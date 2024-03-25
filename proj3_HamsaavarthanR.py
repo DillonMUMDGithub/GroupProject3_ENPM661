@@ -71,7 +71,6 @@ for i in range(899,1019):
         map[k][i] = (255,0,0)
             
 
-
 # Hexagonal Polygon (Blue) with 5mm Border (Black)
 #Outer Black Boundary
 for i in range(519-round,779+round):
