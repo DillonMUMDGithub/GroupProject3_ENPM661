@@ -1,4 +1,26 @@
 ### IMPLEMENTATION OF A* ALGORITHM FOR A MOBILE ROBOT ###
+
+
+#TESTING STRANGE CASE... WHEN TESTED IT WAS GIVING ODD OUTPUTS
+
+
+#Clearance from obstacles and walls: 5
+#Radius of mobile robot: 5
+#Step size of the mobile robot in range [1,10]: 2
+#Heuristic weightage (Enter 1 for default A* execution): 1
+#Building Workspace for Mobile Robot........!
+#Node is a point (X,Y) in cartesian plane for X∈[0,1200] and Y∈[0,500]
+#X - Coordinate of Source Node: 10
+#Y - Coordinate of Source Node: 10
+#X - Coordinate of Goal Node: 1150
+#Y - Coordinate of Goal Node: 450
+#Orientation of nodes (in degrees) is the direction of mobile robot from [180, 150, 120, .., 30, 0, -30, -60, .., -150]
+#Orientation of Source Node (in degrees): 0
+#Orientation of Goal Node (in degrees): 180
+
+
+#PROBLEM FOUND, THE STEP SIZE WAS DEGSINED FOR 500*1200 AND NOT 250*600
+
 #=========================================================================================================================================#
 
 ## Import Necesary Packages ##
@@ -27,17 +49,17 @@ map = np.ones((500, 1200, 3), dtype='uint8')*255
 for i in range(99-round,175+round):
     for k in range(0,399+round):
         map[k][i] = (0,0,0)
-#Inner Blue Rectangle
+#Inner Red Rectangle
 for i in range(99,175):
     for k in range(0,399):
         map[k][i] = (255,0,0)
 
-#Rectangle 2:
+#Rectangel 2:
 #Outer Black Rectangle
 for i in range(274-round,350+round):
     for k in range(99-round,500):
         map[k][i] = (0,0,0)
-# Inner Blue Rectangle
+# Inner Red Rectangle
 for i in range(274,350):
     for k in range(99,500):
         map[k][i] = (255,0,0)
@@ -47,7 +69,7 @@ for i in range(274,350):
 for i in range(1019-round,1099+round):
     for k in range(49-round,449+round):
         map[k][i] = (0,0,0)
-#Inner Blue Rectangle
+#Inner Red Rectangle
 for i in range(1019,1099):
     for k in range(49,449):
         map[k][i] = (255,0,0)
@@ -55,8 +77,9 @@ for i in range(1019,1099):
 #Outer Black Rectangle
 for i in range(899-round,1019):
     for k in range(374-round,449+round):
-        map[k][i] = (0,0,0)  
-#Inner Blue Rectangle
+        map[k][i] = (0,0,0)
+        
+#Inner Red Rectangle
 for i in range(899,1019):
     for k in range(374,449):
         map[k][i] = (255,0,0)
@@ -64,25 +87,28 @@ for i in range(899,1019):
 #Outer Black Rectangle
 for i in range(899-round,1019):
     for k in range(49-round,119+round):
-        map[k][i] = (0,0,0)    
-#Inner Blue Rectangle 
+        map[k][i] = (0,0,0)
+        
+#Inner Red Rectangle 
 for i in range(899,1019):
     for k in range(49,119):
         map[k][i] = (255,0,0)
             
 
+
 # Hexagonal Polygon (Blue) with 5mm Border (Black)
-#Outer Black Boundary
+
 for i in range(519-round,779+round):
     for k in range(174,324):
         map[k][i] = (0,0,0)
-#Interior Blue Rectangle
+#Red Interior Middle Rectangle
 for i in range(519,779):
     for k in range(174,324):
-        map[k][i] = (255,0,0)     
+        map[k][i] = (255,0,0)
+        #blue      
         
 #TopLeftTriangle
-#Outer Black Boundary
+
 GRat = 75/130
 for i in range(519-round,649):
     for k in range(324,399+round):
@@ -90,7 +116,8 @@ for i in range(519-round,649):
         YTemp = k-324
         if ((XTemp+round)*GRat)>YTemp:
             map[k][i] = (0,0,0)
-#Inner Blue Triangle
+            #red
+#Top Left Red Inner
 GRat = 75/130
 for i in range(519,649):
     for k in range(324,399):
@@ -98,9 +125,8 @@ for i in range(519,649):
         YTemp = k-324
         if (XTemp*GRat)>YTemp:
             map[k][i] = (255,0,0)       
-
 #Top Right Triangle
-#Outer Black Boundary
+#Outer Boundary
 GRat = -75/130        
 for i in range(649,779+round):
     for k in range(324,399+round):
@@ -108,7 +134,8 @@ for i in range(649,779+round):
         YTemp = k-324
         if (XTemp*GRat)+(75+round)>YTemp:
             map[k][i] = (0,0,0)
-#Inner Blue Traingle
+            
+#TopRight No barrier
 GRat = -75/130        
 for i in range(649,779):
     for k in range(324,399):
@@ -117,8 +144,7 @@ for i in range(649,779):
         if (XTemp*GRat)+75>YTemp:
             map[k][i] = (255,0,0)
 
-#Bottom Right Triangle 
-#Outer Black Boundary
+#BotRightTriangle 
 GRat = 75/130
 for i in range(649,779+round):
     for k in range(99-round,174):
@@ -126,7 +152,6 @@ for i in range(649,779+round):
         YTemp = k-(99-round)
         if (XTemp*GRat)<YTemp:
             map[k][i] = (0,0,0)
-#Inner Blue Traingle
 GRat = 75/130
 for i in range(649,779):
     for k in range(99,174):
@@ -134,9 +159,7 @@ for i in range(649,779):
         YTemp = k-99
         if (XTemp*GRat)<YTemp:
             map[k][i] = (255,0,0)
-
-#Bottom Left Triangle   
-# Outer Black Boundary
+#BotLeft Triangle   
 GRat = -75/130
 for i in range(519-round,649):
     for k in range(99-round,174):
@@ -144,7 +167,6 @@ for i in range(519-round,649):
         YTemp = k-(99-round)
         if ((XTemp+round)*GRat)+(75+round)<YTemp:
             map[k][i] = (0,0,0)  
-# Inner Blue Triangle
 GRat = -75/130        
 for i in range(519,649):
     for k in range(99,174):
@@ -243,7 +265,7 @@ xg, yg = x2, y2
 cv.circle(img,(xs,ys),radius,(0,255,255),-1) # Source --> 'Yellow'
 cv.circle(img,(xg,yg),radius,(255,0,255),-1) # Goal --> 'Purple'
 # Write out to 'dijkstra_output.avi' video file
-out = cv.VideoWriter('A*_output.mp4', cv.VideoWriter_fourcc(*'mp4v'), 60, (1200,500))
+out = cv.VideoWriter('A*_output.avi', cv.VideoWriter_fourcc(*'XVID'), 60, (1200,500))
 out.write(img)
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
@@ -382,8 +404,7 @@ for i in range(0,len(path)-1):
        out.write(img)
 
 # Last frame in path travelling
-for i in range(120):
-    out.write(img)
+out.write(img)
 
 # Display 'Optimal Path' for 5 seconds
 cv.imshow("Optimal Path", img)
