@@ -24,10 +24,27 @@ border = round//2
 ## Define Map ##
 map = np.ones((500, 1200, 3), dtype='uint8')*255
 
+#Wall Barriers
+for i in range(0,1200):
+    for k in range(0,round):
+        map[k][i] = (0,0,0)
+for i in range(0,1200):
+    for k in range(500-round,500):
+        map[k][i] = (0,0,0)
+for i in range(0,round):
+    for k in range(0,500):
+        map[k][i] = (0,0,0)
+for i in range(1200-round,1200):
+    for k in range(0,500):
+        map[k][i] = (0,0,0)        
+
+
+
+
 #Left Most Rectangle Object
 # Outer Black Rectangle
 for i in range(99-round,175+round):
-    for k in range(0,399+round):
+    for k in range(0,400+round):
         map[k][i] = (0,0,0)
 #Inner Blue Rectangle
 for i in range(99,175):
@@ -46,56 +63,56 @@ for i in range(274,350):
  
 #Right Obstacle (HorseShoe)
 #Outer Black Rectangle
-for i in range(1019-round,1099+round):
-    for k in range(49-round,449+round):
+for i in range(1019-round,1100+round):
+    for k in range(49-round,450+round):
         map[k][i] = (0,0,0)
 #Inner Blue Rectangle
-for i in range(1019,1099):
-    for k in range(49,449):
+for i in range(1019,1100):
+    for k in range(49,450):
         map[k][i] = (255,0,0)
         
 #Outer Black Rectangle
-for i in range(899-round,1019):
-    for k in range(374-round,449+round):
+for i in range(899-round,1020):
+    for k in range(374-round,450+round):
         map[k][i] = (0,0,0)  
 #Inner Blue Rectangle
-for i in range(899,1019):
-    for k in range(374,449):
+for i in range(899,1020):
+    for k in range(374,450):
         map[k][i] = (255,0,0)
         
 #Outer Black Rectangle
-for i in range(899-round,1019):
-    for k in range(49-round,119+round):
+for i in range(899-round,1020):
+    for k in range(49-round,120+round):
         map[k][i] = (0,0,0)    
 #Inner Blue Rectangle 
-for i in range(899,1019):
-    for k in range(49,119):
+for i in range(899,1020):
+    for k in range(49,120):
         map[k][i] = (255,0,0)
             
 
 # Hexagonal Polygon (Blue) with 5mm Border (Black)
 #Outer Black Boundary
-for i in range(519-round,779+round):
-    for k in range(174,324):
+for i in range(519-round,780+round):
+    for k in range(174,325):
         map[k][i] = (0,0,0)
 #Interior Blue Rectangle
-for i in range(519,779):
-    for k in range(174,324):
+for i in range(519,780):
+    for k in range(174,325):
         map[k][i] = (255,0,0)     
         
 #TopLeftTriangle
 #Outer Black Boundary
 GRat = 75/130
-for i in range(519-round,649):
-    for k in range(324,399+round):
+for i in range(519-round,650):
+    for k in range(324,400+round):
         XTemp = i-(519-round)
         YTemp = k-324
         if ((XTemp+round)*GRat)>YTemp:
             map[k][i] = (0,0,0)
 #Inner Blue Triangle
 GRat = 75/130
-for i in range(519,649):
-    for k in range(324,399):
+for i in range(519,650):
+    for k in range(324,400):
         XTemp = i-519
         YTemp = k-324
         if (XTemp*GRat)>YTemp:
@@ -104,16 +121,16 @@ for i in range(519,649):
 #Top Right Triangle
 #Outer Black Boundary
 GRat = -75/130        
-for i in range(649,779+round):
-    for k in range(324,399+round):
+for i in range(649,780+round):
+    for k in range(324,400+round):
         XTemp = i-649
         YTemp = k-324
         if (XTemp*GRat)+(75+round)>YTemp:
             map[k][i] = (0,0,0)
 #Inner Blue Traingle
 GRat = -75/130        
-for i in range(649,779):
-    for k in range(324,399):
+for i in range(649,780):
+    for k in range(324,400):
         XTemp = i-649
         YTemp = k-324
         if (XTemp*GRat)+75>YTemp:
@@ -122,16 +139,16 @@ for i in range(649,779):
 #Bottom Right Triangle 
 #Outer Black Boundary
 GRat = 75/130
-for i in range(649,779+round):
-    for k in range(99-round,174):
+for i in range(649,780+round):
+    for k in range(99-round,175):
         XTemp = i-649
         YTemp = k-(99-round)
         if (XTemp*GRat)<YTemp:
             map[k][i] = (0,0,0)
 #Inner Blue Traingle
 GRat = 75/130
-for i in range(649,779):
-    for k in range(99,174):
+for i in range(649,780):
+    for k in range(99,175):
         XTemp = i-649
         YTemp = k-99
         if (XTemp*GRat)<YTemp:
@@ -140,21 +157,20 @@ for i in range(649,779):
 #Bottom Left Triangle   
 # Outer Black Boundary
 GRat = -75/130
-for i in range(519-round,649):
-    for k in range(99-round,174):
+for i in range(519-round,650):
+    for k in range(99-round,175):
         XTemp = i-(519-round)
         YTemp = k-(99-round)
         if ((XTemp+round)*GRat)+(75+round)<YTemp:
             map[k][i] = (0,0,0)  
 # Inner Blue Triangle
 GRat = -75/130        
-for i in range(519,649):
-    for k in range(99,174):
+for i in range(519,650):
+    for k in range(99,175):
         XTemp = i-519
         YTemp = k-99
         if (XTemp*GRat)+75<YTemp:
             map[k][i] = (255,0,0)
-
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
